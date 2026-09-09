@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecommendationsView: View {
-    @StateObject private var viewModel = RecommendationsViewModel()
+    @State private var viewModel = RecommendationsViewModel()
 
     var body: some View {
         ScrollView {
@@ -62,9 +62,11 @@ struct RecommendationsView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        RecommendationsView()
+struct RecommendationsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            RecommendationsView()
+        }
+        .preferredColorScheme(.dark)
     }
-    .preferredColorScheme(.dark)
 }

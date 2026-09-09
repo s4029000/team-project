@@ -1,8 +1,7 @@
 import Foundation
-import Combine
 
-final class RecommendationsViewModel: ObservableObject {
-    @Published var searchText = ""
+struct RecommendationsViewModel {
+    var searchText = ""
 
     let workouts: [Workout] = [
         .easyParkRun,

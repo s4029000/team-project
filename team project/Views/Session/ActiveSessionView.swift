@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ActiveSessionView: View {
     let workout: Workout
-    @StateObject private var viewModel = ActiveSessionViewModel()
+    @State private var viewModel = ActiveSessionViewModel()
 
     private let columns = [
         GridItem(.flexible(), spacing: 1),
@@ -60,16 +60,20 @@ struct ActiveSessionView: View {
 
     private var controls: some View {
         HStack {
-            SessionControlButton(systemImage: "flag.fill", accessibilityText: "Record lap", action: viewModel.recordLap)
+            SessionControlButton(systemImage: "flag.fill", accessibilityText: "Record lap") {
+                viewModel.recordLap()
+            }
             Spacer()
             SessionControlButton(
                 systemImage: viewModel.isPaused ? "play.fill" : "pause.fill",
                 accessibilityText: viewModel.isPaused ? "Resume workout" : "Pause workout",
                 prominent: true,
-                action: viewModel.togglePause
+                action: { viewModel.togglePause() }
             )
             Spacer()
-            SessionControlButton(systemImage: "stop.fill", accessibilityText: "Stop workout", action: viewModel.stopWorkout)
+            SessionControlButton(systemImage: "stop.fill", accessibilityText: "Stop workout") {
+                viewModel.stopWorkout()
+            }
         }
         .padding()
         .background(Color.white.opacity(0.07))
@@ -98,9 +102,11 @@ struct ActiveSessionView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        ActiveSessionView(workout: .easyParkRun)
+struct ActiveSessionView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ActiveSessionView(workout: .easyParkRun)
+        }
+        .preferredColorScheme(.dark)
     }
-    .preferredColorScheme(.dark)
 }
