@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 final class RecommendationsViewModel: ObservableObject {
     @Published var searchText = ""
